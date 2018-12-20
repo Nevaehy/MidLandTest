@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!-- text -->
+    <color name="colorTextColor">#222222</color>
+    <color name="colorHintColor">#99555555</color>
+
+    <!-- background -->
+    <color name="colorButtonEnabled">#13c26b</color>
+    <color name="colorButtonDisabled">#81caa1</color>
+    <color name="colorEditText">#c2d5c8</color>
+</resources>

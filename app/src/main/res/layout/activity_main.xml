@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:layout_margin="@dimen/usual_margin"
+    tools:context=".ui.ForecastActivity">
+
+
+    <EditText
+        android:layout_width="@dimen/edit_text_width"
+        android:layout_height="@dimen/button_height"
+        android:inputType="textPostalAddress"
+        android:textSize="@dimen/text_size_medium"
+        android:paddingLeft="@dimen/usual_margin"
+        android:hint="@string/city_hint"
+        android:background="@color/colorEditText"
+        android:textColorHint="@color/colorHintColor"
+        android:textColor="@color/colorTextColor"
+        android:id="@+id/edit_text_city"/>
+
+    <Button
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_height"
+        android:layout_marginLeft="@dimen/usual_margin"
+        android:textSize="@dimen/text_size_medium"
+        android:text="@string/next_title"
+        android:textColor="@color/colorTextColor"
+        android:background="@color/colorButtonDisabled"
+        android:id="@+id/button_next"/>
+
+
+</LinearLayout>

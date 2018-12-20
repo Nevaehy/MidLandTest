@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MidLandTest</string>
+    <string name="city_hint">City</string>
+    <string name="next_title">NEXT</string>
+</resources>
