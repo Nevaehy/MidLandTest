@@ -6,24 +6,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.heaven.midlandtest.ui.ForecastListFragment.OnListFragmentInteractionListener;
-import com.heaven.midlandtest.ui.dummy.DummyContent.DummyItem;
-
+import com.heaven.midlandtest.R;
+import com.heaven.midlandtest.model.ForecastResponse;
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+
 public class ForecastRecyclerViewAdapter extends RecyclerView.Adapter<ForecastRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private final List<ForecastResponse.List> mValues;
 
-    public ForecastRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public ForecastRecyclerViewAdapter(List<ForecastResponse.List> items) {
         mValues = items;
-        mListener = listener;
     }
 
     @Override
@@ -36,17 +32,15 @@ public class ForecastRecyclerViewAdapter extends RecyclerView.Adapter<ForecastRe
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mDate.setText(mValues.get(position).getDt().toString());
+        holder.mTemperature.setText(mValues.get(position).getMain().getTemp().toString());
+        holder.mWeather.setText(mValues.get(position).getWeather().get(0).getDescription());
+        holder.mPressure.setText(mValues.get(position).getMain().getPressure().toString());
+        holder.mHumidity.setText(mValues.get(position).getMain().getHumidity().toString());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
-                }
             }
         });
     }
@@ -58,20 +52,22 @@ public class ForecastRecyclerViewAdapter extends RecyclerView.Adapter<ForecastRe
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
+        @BindView(R.id.item_date) TextView mDate;
+        @BindView(R.id.item_weather) TextView mWeather;
+        @BindView(R.id.item_temperature) TextView mTemperature;
+        @BindView(R.id.item_pressure) TextView mPressure;
+        @BindView(R.id.item_humidity) TextView mHumidity;
+        public ForecastResponse.List mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            ButterKnife.bind(this, view);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + mDate.getText() + "'";
         }
     }
 }

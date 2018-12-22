@@ -8,11 +8,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ForecastPresenter implements ForecastMVP.Presenter{
+public class ForecastSearchPresenter implements ForecastMVP.SearchPresenter{
 
-    ForecastMVP.View mView;
+    ForecastMVP.SearchView mView;
 
-    public ForecastPresenter(ForecastMVP.View view) {
+    public ForecastSearchPresenter(ForecastMVP.SearchView view) {
         mView = view;
         mView.init();
     }
@@ -35,10 +35,12 @@ public class ForecastPresenter implements ForecastMVP.Presenter{
         call.enqueue(new Callback<ForecastResponse>() {
             @Override
             public void onResponse(Call<ForecastResponse> call, Response<ForecastResponse> response) {
-                if (response != null && response.body() != null)  {
-
-                }
                 mView.hideLoading();
+                if (response != null && response.body() != null)  {
+                    mView.addFragment(response.body());
+                } else {
+                    mView.showError("Something went wrong");
+                }
             }
 
             @Override

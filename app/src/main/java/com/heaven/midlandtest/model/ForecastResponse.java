@@ -1,8 +1,11 @@
 package com.heaven.midlandtest.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 
-public class ForecastResponse {
+public class ForecastResponse implements Parcelable {
 
     @Expose
     private String cod;
@@ -14,6 +17,32 @@ public class ForecastResponse {
     private java.util.List<List> list = null;
     @Expose
     private City city;
+
+    protected ForecastResponse(Parcel in) {
+        cod = in.readString();
+        if (in.readByte() == 0) {
+            message = null;
+        } else {
+            message = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            cnt = null;
+        } else {
+            cnt = in.readInt();
+        }
+    }
+
+    public static final Creator<ForecastResponse> CREATOR = new Creator<ForecastResponse>() {
+        @Override
+        public ForecastResponse createFromParcel(Parcel in) {
+            return new ForecastResponse(in);
+        }
+
+        @Override
+        public ForecastResponse[] newArray(int size) {
+            return new ForecastResponse[size];
+        }
+    };
 
     public String getCod() {
         return cod;
@@ -53,6 +82,28 @@ public class ForecastResponse {
 
     public void setCity(City city) {
         this.city = city;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(cod);
+        if (message == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeDouble(message);
+        }
+        if (cnt == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(cnt);
+        }
     }
 
     public class City {
